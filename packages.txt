@@ -1,0 +1,119 @@
+Project 'BookingApi.Domain' has the following package references
+   [net7.0]: No packages were found for this framework.
+Project 'BookingApi.Infrastructure' has the following package references
+   [net7.0]: 
+   Top-level Package                                        Requested   Resolved
+   > Microsoft.AspNetCore.Identity.EntityFrameworkCore      7.0.20      7.0.20  
+   > Microsoft.EntityFrameworkCore.Design                   7.0.11      7.0.11  
+   > Npgsql.EntityFrameworkCore.PostgreSQL                  7.0.11      7.0.11  
+
+   Transitive Package                                           Resolved
+   > BookingApi.Domain                                          1.0.0   
+   > Humanizer.Core                                             2.14.1  
+   > Microsoft.AspNetCore.Cryptography.Internal                 7.0.20  
+   > Microsoft.AspNetCore.Cryptography.KeyDerivation            7.0.20  
+   > Microsoft.EntityFrameworkCore                              7.0.20  
+   > Microsoft.EntityFrameworkCore.Abstractions                 7.0.20  
+   > Microsoft.EntityFrameworkCore.Analyzers                    7.0.20  
+   > Microsoft.EntityFrameworkCore.Relational                   7.0.20  
+   > Microsoft.Extensions.Caching.Abstractions                  7.0.0   
+   > Microsoft.Extensions.Caching.Memory                        7.0.0   
+   > Microsoft.Extensions.Configuration.Abstractions            7.0.0   
+   > Microsoft.Extensions.DependencyInjection                   7.0.0   
+   > Microsoft.Extensions.DependencyInjection.Abstractions      7.0.0   
+   > Microsoft.Extensions.DependencyModel                       7.0.0   
+   > Microsoft.Extensions.Identity.Core                         7.0.20  
+   > Microsoft.Extensions.Identity.Stores                       7.0.20  
+   > Microsoft.Extensions.Logging                               7.0.0   
+   > Microsoft.Extensions.Logging.Abstractions                  7.0.0   
+   > Microsoft.Extensions.Options                               7.0.1   
+   > Microsoft.Extensions.Primitives                            7.0.0   
+   > Mono.TextTemplating                                        2.2.1   
+   > Npgsql                                                     7.0.6   
+   > System.CodeDom                                             4.4.0   
+   > System.Text.Encodings.Web                                  7.0.0   
+   > System.Text.Json                                           7.0.0   
+
+Project 'BookingApi.Aplication' has the following package references
+   [net7.0]: 
+   Transitive Package                                           Resolved
+   > BookingApi.Domain                                          1.0.0   
+   > BookingApi.Infrastructure                                  1.0.0   
+   > Microsoft.AspNetCore.Cryptography.Internal                 7.0.20  
+   > Microsoft.AspNetCore.Cryptography.KeyDerivation            7.0.20  
+   > Microsoft.AspNetCore.Identity.EntityFrameworkCore          7.0.20  
+   > Microsoft.EntityFrameworkCore                              7.0.20  
+   > Microsoft.EntityFrameworkCore.Abstractions                 7.0.20  
+   > Microsoft.EntityFrameworkCore.Analyzers                    7.0.20  
+   > Microsoft.EntityFrameworkCore.Relational                   7.0.20  
+   > Microsoft.Extensions.Caching.Abstractions                  7.0.0   
+   > Microsoft.Extensions.Caching.Memory                        7.0.0   
+   > Microsoft.Extensions.Configuration.Abstractions            7.0.0   
+   > Microsoft.Extensions.DependencyInjection                   7.0.0   
+   > Microsoft.Extensions.DependencyInjection.Abstractions      7.0.0   
+   > Microsoft.Extensions.Identity.Core                         7.0.20  
+   > Microsoft.Extensions.Identity.Stores                       7.0.20  
+   > Microsoft.Extensions.Logging                               7.0.0   
+   > Microsoft.Extensions.Logging.Abstractions                  7.0.0   
+   > Microsoft.Extensions.Options                               7.0.1   
+   > Microsoft.Extensions.Primitives                            7.0.0   
+   > Npgsql                                                     7.0.6   
+   > Npgsql.EntityFrameworkCore.PostgreSQL                      7.0.11  
+
+Project 'BookingApi.Presentation' has the following package references
+   [net7.0]: 
+   Top-level Package                                        Requested   Resolved
+   > Microsoft.AspNetCore.Authentication.JwtBearer          7.0.20      7.0.20  
+   > Microsoft.AspNetCore.Identity.EntityFrameworkCore      7.0.20      7.0.20  
+   > Microsoft.AspNetCore.OpenApi                           7.0.14      7.0.14  
+   > Microsoft.EntityFrameworkCore.Analyzers                7.0.14      7.0.14  
+   > Microsoft.EntityFrameworkCore.Design                   7.0.11      7.0.11  
+   > Swashbuckle.AspNetCore                                 6.5.0       6.5.0   
+
+   Transitive Package                                           Resolved
+   > BookingApi.Aplication                                      1.0.0   
+   > BookingApi.Domain                                          1.0.0   
+   > BookingApi.Infrastructure                                  1.0.0   
+   > Humanizer.Core                                             2.14.1  
+   > Microsoft.AspNetCore.Cryptography.Internal                 7.0.20  
+   > Microsoft.AspNetCore.Cryptography.KeyDerivation            7.0.20  
+   > Microsoft.CSharp                                           4.5.0   
+   > Microsoft.EntityFrameworkCore                              7.0.20  
+   > Microsoft.EntityFrameworkCore.Abstractions                 7.0.20  
+   > Microsoft.EntityFrameworkCore.Relational                   7.0.20  
+   > Microsoft.Extensions.ApiDescription.Server                 6.0.5   
+   > Microsoft.Extensions.Caching.Abstractions                  7.0.0   
+   > Microsoft.Extensions.Caching.Memory                        7.0.0   
+   > Microsoft.Extensions.Configuration.Abstractions            7.0.0   
+   > Microsoft.Extensions.DependencyInjection                   7.0.0   
+   > Microsoft.Extensions.DependencyInjection.Abstractions      7.0.0   
+   > Microsoft.Extensions.DependencyModel                       7.0.0   
+   > Microsoft.Extensions.Identity.Core                         7.0.20  
+   > Microsoft.Extensions.Identity.Stores                       7.0.20  
+   > Microsoft.Extensions.Logging                               7.0.0   
+   > Microsoft.Extensions.Logging.Abstractions                  7.0.0   
+   > Microsoft.Extensions.Options                               7.0.1   
+   > Microsoft.Extensions.Primitives                            7.0.0   
+   > Microsoft.IdentityModel.Abstractions                       6.35.0  
+   > Microsoft.IdentityModel.JsonWebTokens                      6.35.0  
+   > Microsoft.IdentityModel.Logging                            6.35.0  
+   > Microsoft.IdentityModel.Protocols                          6.35.0  
+   > Microsoft.IdentityModel.Protocols.OpenIdConnect            6.35.0  
+   > Microsoft.IdentityModel.Tokens                             6.35.0  
+   > Microsoft.NETCore.Platforms                                1.1.0   
+   > Microsoft.NETCore.Targets                                  1.1.0   
+   > Microsoft.OpenApi                                          1.4.3   
+   > Mono.TextTemplating                                        2.2.1   
+   > Npgsql                                                     7.0.6   
+   > Npgsql.EntityFrameworkCore.PostgreSQL                      7.0.11  
+   > Swashbuckle.AspNetCore.Swagger                             6.5.0   
+   > Swashbuckle.AspNetCore.SwaggerGen                          6.5.0   
+   > Swashbuckle.AspNetCore.SwaggerUI                           6.5.0   
+   > System.CodeDom                                             4.4.0   
+   > System.IdentityModel.Tokens.Jwt                            6.35.0  
+   > System.Runtime                                             4.3.0   
+   > System.Security.Cryptography.Cng                           4.5.0   
+   > System.Text.Encoding                                       4.3.0   
+   > System.Text.Encodings.Web                                  7.0.0   
+   > System.Text.Json                                           7.0.0   
+

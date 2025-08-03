@@ -1,0 +1,17 @@
+# Visual Studio / .NET
+bin/
+obj/
+*.user
+*.suo
+*.pubxml
+
+# Docker
+.env
+*.sql
+
+# IDE
+.vscode/
+.idea/
+
+# Mac
+.DS_Store
