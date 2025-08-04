@@ -6,7 +6,7 @@
 Настройка и установка:
   1) Клонировать репризиторий:
      ```bash
-     git clone [https://github.com/fcvf-jmail/TicketsToSky](https://github.com/ogwayz/BookingApi)
+     git clone https://github.com/ogwayz/BookingApi
      cd BookingApi
      ```
   2) Создайте файл .env:
