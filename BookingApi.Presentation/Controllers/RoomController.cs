@@ -20,7 +20,6 @@ namespace BookingApi.Presentation.Controllers
         [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult GetRoom(int id)
         {
-            System.Console.WriteLine($"[DEBUG] GetRoom called with id: {id} User: {User?.Identity?.Name} IsAuthenticated: {User?.Identity?.IsAuthenticated}");
             var room = _bookingService.GetRoom(id);
             return room != null ? Ok(room) : NotFound("Room with id " + id.ToString() + " not found");
         }

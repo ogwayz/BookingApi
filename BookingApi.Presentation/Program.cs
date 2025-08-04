@@ -16,10 +16,10 @@ builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.Environment
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") ?? 
                        builder.Configuration.GetConnectionString("DefaultConnection");
-Console.WriteLine($"Using Connection String: {connectionString}");
+
 builder.Services.AddDbContext<BookingDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddEndpointsApiExplorer();
@@ -72,7 +72,7 @@ builder.Services.AddAuthentication("Bearer")
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY") ?? builder.Configuration["Jwt:Key"]))
         };
     });
 
@@ -80,19 +80,17 @@ builder.Services.AddAuthorization();
 
 
 var key = builder.Configuration["Jwt:Key"];
-System.Console.WriteLine("Program.cs Key: " + key);
 var app = builder.Build();
 
 
 
-using (var scope = app.Services.CreateScope())
-{
 
-    var SeedService = scope.ServiceProvider.GetRequiredService<SeedService>();
-    SeedService.SeedAsync().Wait();
-    
 
-}
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetRequiredService<BookingDbContext>();
+await dbContext.Database.MigrateAsync();
+var seedService = scope.ServiceProvider.GetRequiredService<SeedService>();
+await seedService.SeedAsync();
 
 
 // Configure the HTTP request pipeline.

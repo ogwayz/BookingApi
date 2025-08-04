@@ -63,7 +63,6 @@ namespace BookingApi.Presentation.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            System.Console.WriteLine($"[DEBUG] Registering user: {model.Username}");
             
 
             if (await _userManager.FindByNameAsync(model.Username) != null)
@@ -73,7 +72,6 @@ namespace BookingApi.Presentation.Controllers
             
             var user = new IdentityUser { UserName = model.Username, Email = model.Username };
             var result = await _userManager.CreateAsync(user, model.Password);
-            System.Console.WriteLine($"[DEBUG] CreateAsync result: Succeeded={result.Succeeded}, Errors={string.Join(", ", result.Errors.Select(e => e.Description))}");
 
             if (result.Succeeded)
             {

@@ -62,8 +62,11 @@ namespace BookingApi.Aplication.Services
         public bool IsBookingAvailable(Room Room, DateTime StartDate, DateTime EndDate)
         {
 
-
-            return _context.Bookings.Any(b => b.Room.Id == Room.Id && (EndDate <= b.StartDate || StartDate >= b.EndDate));
+            
+            return !_context.Bookings.Any(b => 
+                b.Room.Id == Room.Id && 
+                StartDate < b.EndDate && 
+                EndDate > b.StartDate);
         }
     }
 }
