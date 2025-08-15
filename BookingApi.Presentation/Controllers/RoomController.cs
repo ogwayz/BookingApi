@@ -28,7 +28,6 @@ namespace BookingApi.Presentation.Controllers
         [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public IActionResult AddRoom([FromBody] Room room)
         {
-            if (room == null) return BadRequest("Room data is required");
             _bookingService.AddRoom(room);
             return CreatedAtAction(nameof(GetRoom), new { id = room.Id }, room);
         }

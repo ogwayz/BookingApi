@@ -31,7 +31,7 @@ namespace BookingApi.Presentation.Controllers
         [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult AddBooking([FromBody] BookingDto bookingDto)
         {
-            if (bookingDto == null) return BadRequest("Booking data is required");
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
             {
@@ -46,8 +46,8 @@ namespace BookingApi.Presentation.Controllers
             {
                 Room = room,
                 UserId = userId,
-                StartDate = bookingDto.StartDate,
-                EndDate = bookingDto.EndDate
+                StartDate = bookingDto.startDate,
+                EndDate = bookingDto.endDate
             };
             try
             {

@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Text;
-
+using DotNetEnv;
+using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
+DotNetEnv.Env.Load("../.env");
+System.Console.WriteLine(Environment.GetEnvironmentVariable("ADMIN_EMAIL"));
+System.Console.WriteLine(Environment.GetEnvironmentVariable("ADMIN_PASSWORD"));
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
@@ -17,8 +21,15 @@ builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.Environment
 
 builder.Services.AddControllers();
 
-var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection") ?? 
-                       builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = string.Format(
+    "Host={0};Port={1};Database={2};User Id={3};Password={4}",
+    Environment.GetEnvironmentVariable("DB_HOST"),
+    Environment.GetEnvironmentVariable("DB_PORT"),
+    Environment.GetEnvironmentVariable("DB_NAME"),
+    Environment.GetEnvironmentVariable("DB_USER"),
+    Environment.GetEnvironmentVariable("DB_PASSWORD"));
+
+Console.WriteLine($"Connection String: {connectionString}");
 
 builder.Services.AddDbContext<BookingDbContext>(options =>
     options.UseNpgsql(connectionString));
@@ -72,14 +83,14 @@ builder.Services.AddAuthentication("Bearer")
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY") ?? builder.Configuration["Jwt:Key"]))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")))
         };
     });
 
 builder.Services.AddAuthorization();
 
 
-var key = builder.Configuration["Jwt:Key"];
+
 var app = builder.Build();
 
 
@@ -88,6 +99,7 @@ var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
 var dbContext = scope.ServiceProvider.GetRequiredService<BookingDbContext>();
+Console.WriteLine("Applying migrations...");
 await dbContext.Database.MigrateAsync();
 var seedService = scope.ServiceProvider.GetRequiredService<SeedService>();
 await seedService.SeedAsync();

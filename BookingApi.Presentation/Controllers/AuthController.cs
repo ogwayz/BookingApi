@@ -31,8 +31,10 @@ namespace BookingApi.Presentation.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
+            
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
             {
+                
                 return Unauthorized("Неверное имя пользователя или пароль");
             }
 
@@ -45,15 +47,14 @@ namespace BookingApi.Presentation.Controllers
                 new Claim(ClaimTypes.Role, string.Join(",", roles))
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            System.Console.WriteLine("AuthController Key: " + _configuration["Jwt:Key"]);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
             issuer: _configuration["Jwt:Issuer"],
             audience: _configuration["Jwt:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddHours(1), // Токен живёт 1 час
+            expires: DateTime.Now.AddHours(12),
             signingCredentials: creds);
 
             return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
@@ -61,7 +62,7 @@ namespace BookingApi.Presentation.Controllers
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register([FromBody] LoginModel model)
         {
             
 
@@ -77,7 +78,7 @@ namespace BookingApi.Presentation.Controllers
             {
                 
                 await _userManager.AddToRoleAsync(user, "User");
-                return Ok( "User registered successfully" );
+                return Ok("User registered successfully");
             }
             return BadRequest(new { error = string.Join(", ", result.Errors.Select(e => e.Description))});
             
