@@ -17,12 +17,7 @@ namespace BookingApi.Infrastructure.Data
         {
         }
 
-        /*
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Server=localhost;Port=5433;Database=BookingDb;User ID=admin;Password=admin123;");
-        }
-        */
+       
 
     }
 
