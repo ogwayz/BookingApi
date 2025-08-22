@@ -20,6 +20,7 @@ namespace BookingApi.Aplication.Services
 
         public async Task SeedAsync()
         {
+            
             var roles = new[] { "Admin", "User" };
             foreach (var role in roles)
             {

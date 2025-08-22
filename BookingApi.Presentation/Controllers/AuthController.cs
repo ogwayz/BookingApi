@@ -56,7 +56,6 @@ namespace BookingApi.Presentation.Controllers
             claims: claims,
             expires: DateTime.Now.AddHours(12),
             signingCredentials: creds);
-
             return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
         }
 

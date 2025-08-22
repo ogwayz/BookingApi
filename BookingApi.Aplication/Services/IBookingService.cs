@@ -9,7 +9,5 @@ namespace BookingApi.Aplication.Services
         void DeleteRoom(int id);
         void AddBooking(Booking booking);
         Booking GetBooking(int id);
-        bool IsBookingAvailable(Room room, DateTime StartDate, DateTime EndDate);
-        
     }
 }
