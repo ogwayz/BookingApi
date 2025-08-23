@@ -59,7 +59,5 @@ namespace BookingApi.Presentation.Controllers
                 return Conflict(ex.Message);
             }
         }
-
     }
-
 }

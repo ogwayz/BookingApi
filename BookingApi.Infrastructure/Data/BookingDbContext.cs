@@ -12,13 +12,9 @@ namespace BookingApi.Infrastructure.Data
     {
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        
+
         public BookingDbContext(DbContextOptions<BookingDbContext> options) : base(options)
         {
         }
-
-       
-
     }
-
 }

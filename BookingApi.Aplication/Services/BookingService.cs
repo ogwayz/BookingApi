@@ -9,30 +9,30 @@ namespace BookingApi.Aplication.Services
 {
     public class BookingService : IBookingService
     {
-        private readonly RoomReprisitory _roomReprisitory;
-        private readonly BookingReprisitory _bookingReprisitory;
+        private readonly RoomRepository _roomRepository;
+        private readonly BookingRepository _bookingRepository;
 
-        public BookingService(RoomReprisitory roomReprisitory, BookingReprisitory bookingReprisitory)
+        public BookingService(RoomRepository roomRepository, BookingRepository bookingRepository)
         {
-            _roomReprisitory = roomReprisitory;
-            _bookingReprisitory = bookingReprisitory;
+            _roomRepository = roomRepository;
+            _bookingRepository = bookingRepository;
         }
 
         public Room GetRoom(int id)
         {
-            return _roomReprisitory.GetById(id);
+            return _roomRepository.GetById(id);
         }
         public void AddRoom(Room room)
         {
-            _roomReprisitory.Add(room);
+            _roomRepository.Add(room);
         }
 
         public void DeleteRoom(int id)
         {
-            var room = _roomReprisitory.GetById(id);
+            var room = _roomRepository.GetById(id);
             if (room != null)
             {
-                _roomReprisitory.Delete(room);
+                _roomRepository.Delete(room);
             }
         }
 
@@ -44,15 +44,15 @@ namespace BookingApi.Aplication.Services
                 throw new ArgumentException("StartDate must be before EndDate");
             }
 
-            if (!_bookingReprisitory.IsAvaliable(booking.Room, booking.StartDate, booking.EndDate))
+            if (!_bookingRepository.IsAvaliable(booking.Room, booking.StartDate, booking.EndDate))
             {
                 throw new InvalidOperationException("Room is already booked for this period");
             }
-            _bookingReprisitory.Add(booking);
+            _bookingRepository.Add(booking);
         }
         public Booking GetBooking(int id)
         {
-            return _bookingReprisitory.GetById(id);
+            return _bookingRepository.GetById(id);
         }
     }
 }

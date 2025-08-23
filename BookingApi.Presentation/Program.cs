@@ -17,8 +17,6 @@ System.Console.WriteLine(Environment.GetEnvironmentVariable("ADMIN_PASSWORD"));
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 
 var connectionString = string.Format(
@@ -35,6 +33,8 @@ builder.Services.AddDbContext<BookingDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<RoomRepository>();
+builder.Services.AddScoped<BookingRepository>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<SeedService>();
 
@@ -43,8 +43,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.SignIn.RequireConfirmedEmail = false;
-    
-    
+
+
 })
 .AddEntityFrameworkStores<BookingDbContext>()
 .AddDefaultTokenProviders();
@@ -53,7 +53,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Events.OnRedirectToLogin = context =>
     {
-        context.Response.StatusCode = 401; 
+        context.Response.StatusCode = 401;
         return Task.CompletedTask;
     };
 });
@@ -74,7 +74,7 @@ builder.Services.AddAuthentication("Bearer")
                 return Task.CompletedTask;
             }
         };
-        
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -89,13 +89,7 @@ builder.Services.AddAuthentication("Bearer")
 
 builder.Services.AddAuthorization();
 
-
-
 var app = builder.Build();
-
-
-
-
 
 using var scope = app.Services.CreateScope();
 var dbContext = scope.ServiceProvider.GetRequiredService<BookingDbContext>();
@@ -104,8 +98,6 @@ await dbContext.Database.MigrateAsync();
 var seedService = scope.ServiceProvider.GetRequiredService<SeedService>();
 await seedService.SeedAsync();
 
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

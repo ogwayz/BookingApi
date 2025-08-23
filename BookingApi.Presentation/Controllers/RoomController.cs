@@ -40,5 +40,4 @@ namespace BookingApi.Presentation.Controllers
             return NoContent();
         }
     }
-
 }

@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-
 using Microsoft.AspNetCore.Mvc;
 using BookingApi.Aplication.Services;
 using BookingApi.Domain;
@@ -25,16 +24,14 @@ namespace BookingApi.Presentation.Controllers
             _configuration = configuration;
         }
 
-
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
-            
+
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                
+
                 return Unauthorized("Неверное имя пользователя или пароль");
             }
 
@@ -59,31 +56,25 @@ namespace BookingApi.Presentation.Controllers
             return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
         }
 
-
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] LoginModel model)
         {
-            
-
             if (await _userManager.FindByNameAsync(model.Username) != null)
             {
                 return BadRequest("User with this name already exist");
             }
-            
+
             var user = new IdentityUser { UserName = model.Username, Email = model.Username };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                
+
                 await _userManager.AddToRoleAsync(user, "User");
                 return Ok("User registered successfully");
             }
-            return BadRequest(new { error = string.Join(", ", result.Errors.Select(e => e.Description))});
-            
+            return BadRequest(new { error = string.Join(", ", result.Errors.Select(e => e.Description)) });
         }
-
-
     }
 
 }

@@ -2,11 +2,11 @@ using BookingApi.Domain;
 using Microsoft.EntityFrameworkCore;
 using BookingApi.Infrastructure.Data;
 
-public class RoomReprisitory
+public class RoomRepository
 {
     private readonly BookingDbContext _context;
 
-    public RoomReprisitory(BookingDbContext context)
+    public RoomRepository(BookingDbContext context)
     {
         _context = context;
     }
